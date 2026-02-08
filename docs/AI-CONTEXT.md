@@ -15,7 +15,7 @@
 **Concept :** Pas de panier ni paiement en ligne. Clic sur produit → Redirection WhatsApp.
 
 ### Stack Technique (Golden Path)
-- **Frontend :** Next.js 15+ (App Router), TypeScript, React 19
+- **Frontend :** Next.js (App Router), TypeScript, React 
 - **Styling :** Tailwind CSS v4 + Lucide Icons
 - **Backend/Auth/DB :** Supabase (PostgreSQL, Auth, Storage)
 - **Déploiement :** Vercel
@@ -35,12 +35,11 @@
 
 ## 🏗️ ARCHITECTURE & STRUCTURE
 
-### Structure des Dossiers (MVP Itératif)
+### Structure des Dossiers (MVP Itératif) "***A revoir"
 ```
 merva/
-├── app/                      # Routes & Layouts
-│   ├── (auth)/              # Groupe : Login, Register
-│   ├── (public)/            # Groupe : Pages publiques
+├── app/                     # Routes & Layouts
+│   ├── auth/                # Login, Register
 │   ├── dashboard/           # Espace vendeur protégé
 │   ├── layout.tsx           # Layout racine (Navbar globale)
 │   └── page.tsx             # Landing Page
@@ -54,7 +53,7 @@ merva/
 │   └── utils.ts             # Helpers (formatPrice, cn, etc.)
 ├── types/
 │   └── database.ts          # Types Supabase auto-générés
-├── utils/supabase/
+├── utils/
 │   ├── client.ts            # Client navigateur
 │   ├── server.ts            # Client serveur + cookies
 │   └── middleware.ts        # Protection routes auth
@@ -63,10 +62,10 @@ merva/
 └── [configs]                # next.config, tsconfig, etc.
 ```
 
-### Modèle de Données (Supabase SQL)
+### Modèle de Données (Supabase SQL) "***A revoir"
 ```sql
 -- Voir BD Superbase.md pour le schéma complet
-profiles (id, full_name, avatar_url)
+profiles (id, first_name, last_name, avatar_url)
 shops (id, owner_id, name, whatsapp_number, logo_url)
 categories (id, name, icon_slug)
 products (id, shop_id, category_id, title, price, image_url)
@@ -80,7 +79,7 @@ products (id, shop_id, category_id, title, price, image_url)
 
 ## 🧠 RÈGLES DE DÉVELOPPEMENT (PATTERNS SENIORS)
 
-### 1. Server Components par Défaut (Next.js 15)
+### 1. Server Components par Défaut (Next.js)
 ✅ **À FAIRE :**
 - Server Components pour l'affichage (fetch data côté serveur)
 - Server Actions pour mutations (create, update, delete)

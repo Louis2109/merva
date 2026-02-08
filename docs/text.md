@@ -97,4 +97,3 @@ Pour être aussi bon que 10 seniors, tu ne dois pas dire "Fais-moi un site". Tu 
 4. **Demande l'action :** "Génère le composant Card pour afficher un produit."
 
 ---
- 
