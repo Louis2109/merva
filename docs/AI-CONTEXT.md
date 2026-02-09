@@ -58,17 +58,64 @@ merva/
 │   ├── server.ts            # Client serveur + cookies
 │   └── middleware.ts        # Protection routes auth
 ├── public/                  # Images, fonts
+├── docs/                    # documentations
 ├── .env.local               # Variables secrètes
 └── [configs]                # next.config, tsconfig, etc.
 ```
 
-### Modèle de Données (Supabase SQL) "***A revoir"
+### Modèle de Données (Supabase SQL)
 ```sql
--- Voir BD Superbase.md pour le schéma complet
-profiles (id, first_name, last_name, avatar_url)
-shops (id, owner_id, name, whatsapp_number, logo_url)
-categories (id, name, icon_slug)
-products (id, shop_id, category_id, title, price, image_url)
+-- Superbase schema with slugs, RLS, and triggers
+
+-- PROFILES (User accounts)
+profiles (
+  id UUID PRIMARY KEY,
+  first_name TEXT,
+  last_name TEXT,
+  avatar_url TEXT,
+  created_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ
+)
+
+-- CATEGORIES (Product categories)
+categories (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  icon_slug TEXT,
+  created_at TIMESTAMPTZ
+)
+
+-- SHOPS (Seller stores)
+shops (
+  id UUID PRIMARY KEY,
+  owner_id UUID REFERENCES profiles(id),
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE NOT NULL,
+  description TEXT,
+  whatsapp_number TEXT NOT NULL,
+  logo_url TEXT,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ
+)
+
+-- PRODUCTS (Items for sale)
+products (
+  id UUID PRIMARY KEY,
+  shop_id UUID REFERENCES shops(id),
+  category_id INTEGER REFERENCES categories(id),
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL,
+  description TEXT,
+  price NUMERIC(10, 2) CHECK (price >= 0),
+  image_url TEXT,
+  stock INTEGER DEFAULT 0,
+  is_active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ,
+  updated_at TIMESTAMPTZ,
+  UNIQUE(shop_id, slug)
+)
 ```
 
 **Politiques RLS (Row Level Security) :**
@@ -178,7 +225,7 @@ export function cn(...inputs: ClassValue[]) {
 1. Visiteur clique sur un produit → Page `/product/[id]`
 2. Affiche image, description, prix
 3. Bouton "Acheter maintenant" → Ouvre WhatsApp
-4. URL WhatsApp : `https://wa.me/{shop.whatsapp_number}?text=Bonjour, je veux acheter {product.title} à {product.price}€`
+4. URL WhatsApp : `https://wa.me/{shop.whatsapp_number}?text=Bonjour, je veux acheter {product.title} à {product.price}F CFA`
 
 ### Workflow Vendeur
 1. Inscription → Crée un profil dans `profiles`
