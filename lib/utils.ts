@@ -36,3 +36,38 @@ import { twMerge } from 'tailwind-merge'
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/**
+ * Generate URL-friendly slug from text
+ * 
+ * Transformation rules:
+ * - Convert to lowercase
+ * - Replace spaces with hyphens
+ * - Remove accents (é → e, à → a)
+ * - Remove special characters
+ * - Remove consecutive hyphens
+ * - Trim hyphens from start/end
+ * 
+ * Examples:
+ * - "Ma Super Boutique" → "ma-super-boutique"
+ * - "Électronique & Gaming!" → "electronique-gaming"
+ * - "Café   Resto" → "cafe-resto"
+ * 
+ * @param text - Text to slugify
+ * @returns URL-friendly slug
+ */
+export function generateSlug(text: string): string {
+  return text
+    .toLowerCase()
+    // Remove accents (normalize to NFD, then remove diacritics)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    // Replace spaces with hyphens
+    .replace(/\s+/g, '-')
+    // Remove all non-alphanumeric characters except hyphens
+    .replace(/[^a-z0-9-]/g, '')
+    // Remove consecutive hyphens
+    .replace(/-+/g, '-')
+    // Trim hyphens from start/end
+    .replace(/^-+|-+$/g, '')
+}

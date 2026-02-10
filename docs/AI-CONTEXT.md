@@ -199,17 +199,14 @@ export function cn(...inputs: ClassValue[]) {
 
 ### Pages Publiques
 1. **/** : Landing Page (Hero + Top Catégories + Produits récents)
-2. **/categories** : Grille des catégories
-3. **/shops** : Liste des boutiques populaires
-4. **/product/[id]** : Page produit avec bouton WhatsApp
-5. **/shop/[id]** : Produits d'une boutique spécifique
+2. **/product/[id]** : Page produit avec bouton WhatsApp
+3. **/shop/[id]** : Produits d'une boutique spécifique
 
 ### Pages Authentifiées
 1. **/login** : Connexion (Supabase Auth)
 2. **/register** : Inscription
 3. **/dashboard** : Statistiques vendeur
-4. **/dashboard/shop** : Gestion boutique (CRUD)
-5. **/dashboard/products** : Gestion produits (CRUD)
+4. **/dashboard/products** : Gestion produits (CRUD)
 
 ### Composants Clés
 - **Navbar** : Sticky Glassmorphism, links dynamiques (connecté/déconnecté)
@@ -234,7 +231,7 @@ export function cn(...inputs: ClassValue[]) {
 4. Produits visibles immédiatement sur la page publique
 
 ### Sécurité (RLS Supabase)
-- **Lecture publique :** Tout le monde peut voir products, shops, categories
+- **Lecture publique :** Tout le monde peut voir products, shops
 - **Écriture restreinte :** Seul le propriétaire peut modifier sa boutique/produits
 - **Auth middleware :** Protéger `/dashboard/*` avec Next.js Middleware
 
@@ -300,7 +297,7 @@ function getProducts() { ... }
 ### 3. Après le Code (Validation)
 - Demander à David de tester
 - Expliquer comment étendre/modifier plus tard
-- Suggérer des améliorations futures (mais pas maintenant)
+- Suggérer des améliorations futures (pas maintenant)
 
 ### 4. En Cas d'Erreur (Debug)
 - Lire les logs/erreurs

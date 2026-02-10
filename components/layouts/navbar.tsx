@@ -51,14 +51,14 @@ export function Navbar({ user }: NavbarProps) {
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:gap-6">
             <NavLink href="/" icon={<Home className="w-4 h-4" />}>
-              Home
+              Accueil
             </NavLink>
             <NavLink href="/products" icon={<ShoppingBag className="w-4 h-4" />}>
-              Products
+              Produits
             </NavLink>
             {user && (
               <NavLink href="/dashboard" icon={<LayoutDashboard className="w-4 h-4" />}>
-                Dashboard
+                Tableau de bord
               </NavLink>
             )}
           </div>
@@ -69,13 +69,13 @@ export function Navbar({ user }: NavbarProps) {
               <form action={logout}>
                 <Button variant="ghost" size="sm" type="submit">
                   <LogOut className="w-4 h-4 mr-2" />
-                  Logout
+                  Déconnexion
                 </Button>
               </form>
             ) : (
               <Link href="/auth/login">
                 <Button variant="primary" size="sm">
-                  Sign In
+                  Connexion
                 </Button>
               </Link>
             )}
@@ -105,14 +105,14 @@ export function Navbar({ user }: NavbarProps) {
       >
         <div className="px-4 py-4 space-y-2 bg-white/95 backdrop-blur-lg border-t border-gray-200">
           <MobileNavLink href="/" icon={<Home className="w-5 h-5" />} onClick={closeMobileMenu}>
-            Home
+            Accueil
           </MobileNavLink>
           <MobileNavLink href="/products" icon={<ShoppingBag className="w-5 h-5" />} onClick={closeMobileMenu}>
-            Products
+            Produits
           </MobileNavLink>
           {user && (
             <MobileNavLink href="/dashboard" icon={<LayoutDashboard className="w-5 h-5" />} onClick={closeMobileMenu}>
-              Dashboard
+              Tableau de bord
             </MobileNavLink>
           )}
           
@@ -122,13 +122,13 @@ export function Navbar({ user }: NavbarProps) {
               <form action={logout}>
                 <Button variant="ghost" size="md" className="w-full" type="submit">
                   <LogOut className="w-5 h-5 mr-2" />
-                  Logout
+                  Déconnexion
                 </Button>
               </form>
             ) : (
               <Link href="/auth/login" onClick={closeMobileMenu}>
                 <Button variant="primary" size="md" className="w-full">
-                  Sign In
+                  Connexion
                 </Button>
               </Link>
             )}

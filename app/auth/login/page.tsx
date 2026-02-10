@@ -24,9 +24,9 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card variant="glass" className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold text-center">Welcome Back</CardTitle>
+          <CardTitle className="text-3xl font-bold text-center">Bon retour</CardTitle>
           <CardDescription className="text-center">
-            Sign in to your Mervason account
+            Connectez-vous à votre compte Mervason
           </CardDescription>
         </CardHeader>
 
@@ -39,7 +39,7 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="test@exemple.com"
                 required
                 autoComplete="email"
               />
@@ -47,7 +47,7 @@ export default function LoginPage() {
 
             {/* Password Field */}
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Mot de passe</Label>
               <Input
                 id="password"
                 name="password"
@@ -63,14 +63,14 @@ export default function LoginPage() {
           <CardFooter className="flex flex-col gap-4">
             {/* Submit Button */}
             <Button type="submit" variant="primary" size="lg" className="w-full">
-              Sign In
+              Se connecter
             </Button>
 
             {/* Register Link */}
             <p className="text-sm text-center text-gray-600">
-              Don't have an account?{' '}
+              Pas encore de compte?{' '}
               <Link href="/auth/register" className="text-orange-500 hover:underline font-medium">
-                Sign up
+                S'inscrire
               </Link>
             </p>
           </CardFooter>
@@ -81,6 +81,6 @@ export default function LoginPage() {
 }
 
 export const metadata = {
-  title: 'Login - Mervason',
-  description: 'Sign in to your Mervason account',
+  title: 'Connexion - Mervason',
+  description: 'Connectez-vous à votre compte Mervason',
 }
