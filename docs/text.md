@@ -98,69 +98,46 @@ Pour être aussi bon que 10 seniors, tu ne dois pas dire "Fais-moi un site". Tu 
 
 ---
 
-J'ai l'impression que le signIn, register ne marche pas, d'ou viens l'erreur ? Ah ok, j'ai trouver le pb, il failais use un email reel (pas d'email fictif, c'est ok), puis aller confirmer le register dans ma boite mail. Je ne savais pas cela, il faut un message de notification pour signaler cela a l'utilisateur. 
-Pourquoi ses pages sont en anglais ? Le site dois etre en francais, on vas ajouter l'anglais plutard. 
-A chaque fois qu'on termine une phase ou step valider, donne moi le message pour le commit de github. 
+git add .
+git commit -m "feat(products): implement complete product CRUD system (Phase 3 Step 2)
 
-Cool, j'aime bien ce que je vois sur le terminal, sa me permet de comprendre ce qui ce passe en temps reel. 
-david@ThinkPad:~/Desktop/Projet/merva$ npm run dev
+- Add 4 Server Actions (create, update, delete, toggle status)
+- Create reusable ProductForm component (add/edit modes)
+- Build products list page with zebra-striped table
+- Add product creation page with category selection
+- Add product edit page with prefilled data
+- Enable 'Voir mes produits' button on dashboard
 
-> merva@0.1.0 dev
-> next dev
+Features:
+- Table with zebra stripes (alternate row colors)
+- Price formatting with thousand separators (25 000 XAF)
+- Color-coded stock indicators (red/orange/green)
+- Active/Inactive status badges
+- Inline Edit/Delete actions with confirmation
+- Ownership protection (user can only manage their shop's products)
+- Form validation (title min 3 chars, price > 0, stock >= 0)
+- Empty state when no products
+- Responsive design (mobile table scroll)
+- Category dropdown with 18 default categories
 
-▲ Next.js 16.1.1 (Turbopack)
-- Local:         http://localhost:3000
-- Network:       http://192.168.100.90:3000
-- Environments: .env.local
+Technical details:
+- Server Components for data fetching (SEO + performance)
+- Client Component only for form interactivity
+- Ownership verification on all mutations
+- TypeScript type casting for Supabase relations (!inner)
+- Intl.NumberFormat for standard price formatting
+- HTML5 form validation + Server-side validation
 
-✓ Starting...
-⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
-✓ Ready in 4.3s
- GET /auth/login 200 in 2.0s (compile: 1043ms, proxy.ts: 235ms, render: 751ms)
-Login error: Invalid login credentials
- GET /auth/login?error=invalid 200 in 151ms (compile: 8ms, proxy.ts: 14ms, render: 130ms)
- POST /auth/login 303 in 2.2s (compile: 10ms, proxy.ts: 13ms, render: 2.2s)
- GET /auth/register 200 in 119ms (compile: 53ms, proxy.ts: 9ms, render: 58ms)
-Signup error: Email address "test1@test.com" is invalid
- GET /auth/register?error=signup 200 in 106ms (compile: 5ms, proxy.ts: 9ms, render: 92ms)
- POST /auth/register 303 in 1616ms (compile: 13ms, proxy.ts: 18ms, render: 1586ms)
- GET /auth/login 200 in 48ms (compile: 5ms, proxy.ts: 6ms, render: 37ms)
-Login error: Invalid login credentials
- GET /auth/login?error=invalid 200 in 135ms (compile: 11ms, proxy.ts: 11ms, render: 114ms)
- POST /auth/login 303 in 1240ms (compile: 13ms, proxy.ts: 11ms, render: 1216ms)
- GET /auth/register 200 in 100ms (compile: 13ms, proxy.ts: 20ms, render: 67ms)
- GET /auth/login?redirectTo=%2Fdashboard 200 in 99ms (compile: 5ms, proxy.ts: 10ms, render: 83ms)
- POST /auth/register 303 in 3.2s (compile: 9ms, proxy.ts: 15ms, render: 3.1s)
-Login error: Email not confirmed
- GET /auth/login?error=invalid 200 in 91ms (compile: 7ms, proxy.ts: 9ms, render: 74ms)
- POST /auth/login?redirectTo=%2Fdashboard 303 in 839ms (compile: 8ms, proxy.ts: 11ms, render: 820ms)
- GET /?code=01814160-1f4b-4876-a7e9-58542c5e8a46 200 in 196ms (compile: 41ms, proxy.ts: 8ms, render: 146ms)
- GET /auth/login 200 in 98ms (compile: 11ms, proxy.ts: 14ms, render: 72ms)
- GET /auth/login 200 in 54ms (compile: 7ms, proxy.ts: 5ms, render: 42ms)
-Login error: Invalid login credentials
- GET /auth/login?error=invalid 200 in 98ms (compile: 8ms, proxy.ts: 13ms, render: 78ms)
- POST /auth/login 303 in 1598ms (compile: 7ms, proxy.ts: 15ms, render: 1575ms)
- GET /dashboard 200 in 1746ms (compile: 906ms, proxy.ts: 407ms, render: 433ms)
- POST /auth/login?error=invalid 303 in 3.0s (compile: 6ms, proxy.ts: 11ms, render: 3.0s)
- GET / 200 in 691ms (compile: 10ms, proxy.ts: 640ms, render: 41ms)
- GET /products 200 in 383ms (compile: 41ms, proxy.ts: 309ms, render: 33ms)
- GET /dashboard 200 in 415ms (compile: 11ms, proxy.ts: 362ms, render: 42ms)
- GET /products 200 in 429ms (compile: 7ms, proxy.ts: 374ms, render: 49ms)
- GET / 200 in 403ms (compile: 7ms, proxy.ts: 304ms, render: 93ms)
- GET /dashboard 200 in 830ms (compile: 15ms, proxy.ts: 373ms, render: 442ms)
- POST /auth/login?error=invalid 303 in 2.2s (compile: 6ms, proxy.ts: 16ms, render: 2.2s)
- GET / 200 in 899ms (compile: 7ms, proxy.ts: 863ms, render: 29ms)
- GET /products 200 in 432ms (compile: 11ms, proxy.ts: 377ms, render: 43ms)
- GET /dashboard 200 in 504ms (compile: 15ms, proxy.ts: 407ms, render: 82ms)
- GET / 200 in 83ms (compile: 8ms, proxy.ts: 5ms, render: 70ms)
- POST /dashboard 303 in 1540ms (compile: 7ms, proxy.ts: 999ms, render: 534ms)
- GET /auth/login 200 in 102ms (compile: 10ms, proxy.ts: 15ms, render: 77ms)
- GET /dashboard 200 in 922ms (compile: 4ms, proxy.ts: 404ms, render: 515ms)
- POST /auth/login 303 in 2.1s (compile: 7ms, proxy.ts: 12ms, render: 2.1s)
- GET / 200 in 735ms (compile: 5ms, proxy.ts: 699ms, render: 32ms)
- GET / 200 in 61ms (compile: 4ms, proxy.ts: 5ms, render: 52ms)
- POST / 303 in 1769ms (compile: 8ms, proxy.ts: 1283ms, render: 478ms)
- GET /auth/login?redirectTo=%2Fdashboard 200 in 150ms (compile: 5ms, proxy.ts: 5ms, render: 141ms)
- GET /auth/login 200 in 68ms (compile: 9ms, proxy.ts: 18ms, render: 40ms)
- GET /dashboard 200 in 657ms (compile: 6ms, proxy.ts: 292ms, render: 359ms)
- POST /auth/login 303 in 1916ms (compile: 16ms, proxy.ts: 11ms, render: 1888ms)
+Files created:
+- lib/actions/products.ts (290 lines)
+- components/features/product-form.tsx
+- app/dashboard/products/page.tsx (table + formatPrice)
+- app/dashboard/products/add/page.tsx
+- app/dashboard/products/[id]/edit/page.tsx
+- docs/seed-categories.sql (18 categories)"
+
+
+
+
+
+Le context window est plein, que faire pour le diminuer et continuer a travailler. 

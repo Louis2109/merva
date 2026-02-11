@@ -140,11 +140,13 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-600 mb-4">
-              Gestion des produits arrive en Phase 3, Step 2 (dans le prochain prompt).
+              Ajoutez, modifiez ou supprimez vos produits
             </p>
-            <Button variant="secondary" disabled>
-              Voir mes produits
-            </Button>
+            <Link href="/dashboard/products">
+              <Button variant="secondary">
+                Voir mes produits
+              </Button>
+            </Link>
           </CardContent>
         </Card>
 

@@ -164,8 +164,8 @@ CREATE TRIGGER products_updated_at
 
 -- ============================================
 -- SEED DATA (Initial categories)
--- ============================================
-INSERT INTO categories (name, slug, icon_slug) VALUES
+-- ============================================ 
+INSERT INTO categories (name, slug, icon_slug) VALUES  -- Pense a update cette partie qvec les element de seed-categories.sql
   ('Electronics', 'electronics', 'Smartphone'),
   ('Fashion', 'fashion', 'Shirt'),
   ('Home', 'home', 'Home'),
