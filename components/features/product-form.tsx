@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ImageUpload } from '@/components/features/image-upload'
+import { Loader2 } from 'lucide-react'
 import type { Product, Category } from '@/types'
 
 interface ProductFormProps {
@@ -48,6 +49,7 @@ interface ProductFormProps {
  */
 export function ProductForm({ mode, action, categories, product }: ProductFormProps) {
   const isEditMode = mode === 'edit'
+  const [isSubmitting, setIsSubmitting] = useState(false)
   
   // Get images - handle both images array and legacy image_url
   const getInitialImages = (): string[] => {
@@ -64,6 +66,16 @@ export function ProductForm({ mode, action, categories, product }: ProductFormPr
   }
   
   const [images, setImages] = useState<string[]>(getInitialImages())
+
+  const handleSubmit = async (formData: FormData) => {
+    setIsSubmitting(true)
+    try {
+      await action(formData)
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setIsSubmitting(false)
+    }handleSubmit
+  }
 
   return (
     <Card variant="glass">
@@ -203,11 +215,24 @@ export function ProductForm({ mode, action, categories, product }: ProductFormPr
             variant="ghost"
             size="lg"
             onClick={() => window.history.back()}
+            disabled={isSubmitting}
           >
             Annuler
           </Button>
-          <Button type="submit" variant="primary" size="lg">
-            {isEditMode ? 'Enregistrer les modifications' : 'Ajouter le produit'}
+          <Button 
+            type="submit" 
+            variant="primary" 
+            size="lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Enregistrement...
+              </>
+            ) : (
+              isEditMode ? 'Enregistrer les modifications' : 'Ajouter le produit'
+            )}
           </Button>
         </CardFooter>
       </form>

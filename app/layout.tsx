@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layouts/navbar";
 import { createServerClient } from "@/utils/supabase/server";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,14 +16,48 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mervason - Multi-Vendor E-commerce Marketplace",
-  description: "Buy and sell products easily.",
-  keywords: ["e-commerce", "marketplace", "whatsapp", "online shopping", "cameroon"],
+  metadataBase: new URL('https://mervason.com'),
+  title: {
+    default: "Mervason - Marketplace Multi-Vendeurs au Cameroun",
+    template: "%s | Mervason"
+  },
+  description: "Achetez et vendez facilement via WhatsApp. Marketplace e-commerce multi-vendeurs au Cameroun.",
+  keywords: ["e-commerce", "marketplace", "whatsapp", "online shopping", "cameroon", "cameroun", "boutique en ligne", "vente en ligne"],
   authors: [{ name: "Mervason Team" }],
+  creator: "Mervason",
+  publisher: "Mervason",
   openGraph: {
-    title: "Mervason - Multi-Vendor Marketplace",
-    description: "Buy and sell products easily.",
     type: "website",
+    locale: "fr_FR",
+    url: "https://mervason.com",
+    siteName: "Mervason",
+    title: "Mervason - Marketplace Multi-Vendeurs",
+    description: "Achetez et vendez facilement via WhatsApp au Cameroun",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Mervason Marketplace",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mervason - Marketplace Multi-Vendeurs",
+    description: "Achetez et vendez facilement via WhatsApp au Cameroun",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
@@ -36,7 +71,12 @@ export default async function RootLayout({
   const { data: { user } } = await supabase.auth.getUser()
 
   return (
-    <html lang="en">
+    <html lang="fr">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="theme-color" content="#F97316" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
       >
@@ -44,6 +84,7 @@ export default async function RootLayout({
         <main className="min-h-screen">
           {children}
         </main>
+        <Toaster position="top-right" richColors />
       </body>
     </html>
   );

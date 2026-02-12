@@ -138,7 +138,7 @@ useEffect(() => {
 
 ---
 
-## 💻 PARTIE 2 : MAÎTRISER L'AI CODING (ChatGPT, Copilot, etc.)
+## 💻 PARTIE 2 : MAÎTRISER L'AI CODING (Copilot, ChatGpt, etc.)
 
 ### 2.1 L'IA est un Collègue Senior, Pas un Oracle
 

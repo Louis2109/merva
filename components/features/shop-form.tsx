@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { createShop } from '@/lib/actions/shops'
-import { Store } from 'lucide-react'
+import { Store, Loader2 } from 'lucide-react'
 
 /**
  * Shop Creation Form
@@ -25,6 +25,17 @@ import { Store } from 'lucide-react'
  */
 export function ShopForm() {
   const [slugPreview, setSlugPreview] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (formData: FormData) => {
+    setIsSubmitting(true)
+    try {
+      await createShop(formData)
+    } catch (error) {
+      console.error('Shop creation error:', error)
+      setIsSubmitting(false)
+    }
+  }
 
   // Generate slug preview when user types shop name
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,7 +72,7 @@ export function ShopForm() {
         </div>
       </CardHeader>
 
-      <form action={createShop}>
+      <form action={handleSubmit}>
         <CardContent className="space-y-6">
           {/* Shop Name */}
           <div className="space-y-2">
@@ -131,11 +142,24 @@ export function ShopForm() {
             variant="ghost"
             size="lg"
             onClick={() => window.history.back()}
+            disabled={isSubmitting}
           >
             Annuler
           </Button>
-          <Button type="submit" variant="primary" size="lg">
-            Créer ma boutique
+          <Button 
+            type="submit" 
+            variant="primary" 
+            size="lg"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                Création...
+              </>
+            ) : (
+              'Créer ma boutique'
+            )}
           </Button>
         </CardFooter>
       </form>
