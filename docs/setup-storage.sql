@@ -26,7 +26,7 @@ FOR INSERT
 TO authenticated
 WITH CHECK (
   bucket_id = 'product-images' AND
-  (storage.foldername(name))[1] = auth.uid()::text
+  (string_to_array(name, '/'))[1] = auth.uid()::text
 );
 
 -- RLS Policy 2: Public read access (SELECT)
@@ -45,7 +45,7 @@ FOR DELETE
 TO authenticated
 USING (
   bucket_id = 'product-images' AND
-  (storage.foldername(name))[1] = auth.uid()::text
+  (string_to_array(name, '/'))[1] = auth.uid()::text
 );
 
 -- Verify bucket creation

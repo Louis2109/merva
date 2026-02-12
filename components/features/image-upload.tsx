@@ -117,12 +117,12 @@ export function ImageUpload({ existingImages = [], productId, onImagesChange }: 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <Label>
+        <div className="text-sm font-medium">
           Images du produit
           <span className="text-sm text-gray-500 ml-2">
             ({images.length}/5)
           </span>
-        </Label>
+        </div>
         
         {images.length < 5 && (
           <label className="cursor-pointer">

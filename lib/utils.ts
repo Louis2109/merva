@@ -71,3 +71,23 @@ export function generateSlug(text: string): string {
     // Trim hyphens from start/end
     .replace(/^-+|-+$/g, '')
 }
+
+/**
+ * Format price with thousand separators (French format)
+ * 
+ * Cameroon uses XAF (Central African CFA franc) with French number formatting
+ * 
+ * Examples:
+ * - 25000 → "25 000"
+ * - 1500 → "1 500"
+ * - 999 → "999"
+ * 
+ * @param price - Price in XAF (integer)
+ * @returns Formatted price string with space separators
+ */
+export function formatPrice(price: number): string {
+  return new Intl.NumberFormat('fr-FR', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price)
+}

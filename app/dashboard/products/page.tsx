@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Plus, Edit, Package } from 'lucide-react'
 import { DeleteProductButton } from '@/components/features/delete-product-button'
+import { formatPrice } from '@/lib/utils'
 
 /**
  * Products List Page
@@ -224,17 +225,6 @@ export default async function ProductsPage() {
       )}
     </div>
   )
-}
-
-/**
- * Format price with thousand separators
- * Example: 25000 → "25 000"
- */
-function formatPrice(price: number): string {
-  return new Intl.NumberFormat('fr-FR', {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0,
-  }).format(price)
 }
 
 export const metadata = {

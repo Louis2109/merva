@@ -98,46 +98,7 @@ Pour être aussi bon que 10 seniors, tu ne dois pas dire "Fais-moi un site". Tu 
 
 ---
 
-git add .
-git commit -m "feat(products): implement complete product CRUD system (Phase 3 Step 2)
-
-- Add 4 Server Actions (create, update, delete, toggle status)
-- Create reusable ProductForm component (add/edit modes)
-- Build products list page with zebra-striped table
-- Add product creation page with category selection
-- Add product edit page with prefilled data
-- Enable 'Voir mes produits' button on dashboard
-
-Features:
-- Table with zebra stripes (alternate row colors)
-- Price formatting with thousand separators (25 000 XAF)
-- Color-coded stock indicators (red/orange/green)
-- Active/Inactive status badges
-- Inline Edit/Delete actions with confirmation
-- Ownership protection (user can only manage their shop's products)
-- Form validation (title min 3 chars, price > 0, stock >= 0)
-- Empty state when no products
-- Responsive design (mobile table scroll)
-- Category dropdown with 18 default categories
-
-Technical details:
-- Server Components for data fetching (SEO + performance)
-- Client Component only for form interactivity
-- Ownership verification on all mutations
-- TypeScript type casting for Supabase relations (!inner)
-- Intl.NumberFormat for standard price formatting
-- HTML5 form validation + Server-side validation
-
-Files created:
-- lib/actions/products.ts (290 lines)
-- components/features/product-form.tsx
-- app/dashboard/products/page.tsx (table + formatPrice)
-- app/dashboard/products/add/page.tsx
-- app/dashboard/products/[id]/edit/page.tsx
-- docs/seed-categories.sql (18 categories)"
-
-
-
-
-
-Le context window est plein, que faire pour le diminuer et continuer a travailler. 
+# Vide le context chaque fois qu'il est presque plein. Comment font les grand dev ?
+# Lorsque une task est finis et que les test checklist sont valider, donne moi souvent le message pour le git commit. 
+# A chaque task, rappel toi que tu es la pour m'aider a etre plus productif et devemir meilleur, tu dois m'expliquer ce qu'on est entrain de faire, me challenger a etre meilleur, garder un environement cool et relaxant, pas de stress.  
+# J'aime quand tu me dis ce que tu es entrain de faire, m'aide a penser la logic bussiness, use les patern de grand dev, dire ce qui a ete faire, donne les test checklist pour tester, donne le prompt por la suite(sa m'aide a apprendre le prompt engineering)

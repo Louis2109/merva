@@ -167,6 +167,15 @@ export function ProductForm({ mode, action, categories, product }: ProductFormPr
             </select>
           </div>
 
+          {/* Image Upload */}
+          <div className="border-t border-gray-200 pt-6">
+            <ImageUpload
+              existingImages={images}
+              productId={product?.id}
+              onImagesChange={setImages}
+            />
+          </div>
+
           {/* Active Status (Edit mode only) */}
           {isEditMode && (
             <div className="space-y-2 p-4 bg-gray-50 rounded-lg">
@@ -183,15 +192,6 @@ export function ProductForm({ mode, action, categories, product }: ProductFormPr
               </Label>
               <p className="text-xs text-gray-500 ml-6">
                 Décochez pour masquer temporairement le produit sans le supprimer
-
-          {/* Image Upload */}
-          <div className="border-t border-gray-200 pt-6">
-            <ImageUpload
-              existingImages={images}
-              productId={product?.id}
-              onImagesChange={setImages}
-            />
-          </div>
               </p>
             </div>
           )}
