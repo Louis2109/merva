@@ -3,7 +3,7 @@
 ## 📖 INTRODUCTION
 
 **À qui s'adresse ce guide ?**  
-Toi, David, étudiant en cybersécurité qui veut maîtriser le développement web comme un senior. Ce document est ta bible pour comprendre comment les meilleurs devs travaillent en 2026.
+Toi, David, étudiant en cybersécurité qui veut maîtriser le développement web comme un senior. Ce document est ta bible pour comprendre comment les meilleurs devs travaillent.
 
 **Objectif :**  
 Te donner la mentalité, les outils et les patterns des développeurs senior qui construisent des applications réelles, scalables et maintenables.

@@ -3,6 +3,7 @@
 // Utilise les cookies pour maintenir la session utilisateur
 
 import { createServerClient as createSupabaseServerClient } from '@supabase/ssr'
+import { createClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
 /**
@@ -47,5 +48,32 @@ export async function createServerClient() {
         },
       },
     }
+  )
+}
+
+/**
+ * Create anonymous Supabase client for build-time operations
+ * 
+ * Why this function?
+ * - generateStaticParams() runs at BUILD TIME (no HTTP request)
+ * - No cookies available at build time
+ * - Need public data only (no user-specific data)
+ * 
+ * Where to use?
+ * - generateStaticParams() only
+ * - Do NOT use for authenticated routes
+ * - Only for public data fetching
+ * 
+ * Difference from createServerClient():
+ * - ✅ Works at build time
+ * - ✅ No cookies needed
+ * - ❌ Cannot access user-specific data
+ * 
+ * @returns Anonymous Supabase client (public access only)
+ */
+export function createAnonymousClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
   )
 }
