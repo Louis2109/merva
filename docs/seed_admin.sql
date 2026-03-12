@@ -26,7 +26,7 @@ SET
   last_name = 'Mervason',
   updated_at = NOW()
 WHERE id IN (
-  SELECT id FROM auth.users WHERE email = 'admin@mervason.com'
+  SELECT id FROM auth.users WHERE email = 'nkenfackloic@outlook.com'
 );
 
 -- Verify admin created

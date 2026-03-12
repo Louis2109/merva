@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS plans (
 INSERT INTO plans (name, product_limit, price, features) VALUES
   ('free', 20, 0, ARRAY['Support Email', 'Dashboard Basic']),
   ('standard', 50, 5000, ARRAY['Support WhatsApp', 'Analytics Basic', 'Badge Vérifié']),
-  ('premium', 100, 15000, ARRAY['Support Priority', 'Analytics Pro', 'Badge Premium', 'Page Personnalisée'])
+  ('premium', 100, 8000, ARRAY['Support Priority', 'Analytics Pro', 'Badge Premium', 'Page Personnalisée'])
 ON CONFLICT (name) DO NOTHING;
 
 -- ============================================
@@ -83,12 +83,6 @@ DROP POLICY IF EXISTS "Users can view own profile" ON profiles;
 CREATE POLICY "Anyone can view profiles"
   ON profiles FOR SELECT
   USING (true);
-
-CREATE POLICY "Users can update own profile"
-  ON profiles FOR UPDATE
-  USING (auth.uid() = id OR EXISTS(
-    SELECT 1 FROM profiles WHERE id = auth.uid() AND is_admin = true
-  ));
 
 -- SHOPS: Public sees active, owners see theirs, admins see all
 CREATE POLICY "Public can view active shops"

@@ -38,18 +38,24 @@ export function OrderForm({ productTitle, productPrice, whatsappNumber }: OrderF
 
   // Build WhatsApp message with customer info
   const buildWhatsAppMessage = () => {
-    const message = `🛒 NOUVELLE COMMANDE
+    // Format phone number with country code if not present
+    const formattedPhone = customerPhone.startsWith('+')
+      ? customerPhone
+      : `+237${customerPhone.replace(/^0/, '')}`
 
-📦 Produit: ${productTitle}
-💰 Prix: ${productPrice} XAF
+    const message = `🛒 *Nouvelle Commande Mervason*
 
-👤 INFORMATIONS CLIENT:
+📦 *Produit*
+Nom: ${productTitle}
+Prix: ${productPrice} FCFA
+
+👤 *Client*
 Nom: ${customerName}
-Téléphone: ${customerPhone}
+Tél: ${formattedPhone}
 Ville: ${city}
 Quartier: ${neighborhood}
 
-Merci de confirmer la disponibilité.`
+Merci de confirmer la disponibilité du produit.`
 
     return encodeURIComponent(message)
   }

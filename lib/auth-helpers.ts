@@ -12,7 +12,7 @@ import { redirect } from 'next/navigation'
  * Get current user with role information
  */
 export async function getCurrentUser() {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   
   const { data: { user }, error: authError } = await supabase.auth.getUser()
   
@@ -101,7 +101,7 @@ export async function requireMerchant() {
  * Returns: { canAdd: boolean, current: number, limit: number, remaining: number }
  */
 export async function checkProductLimit(shopId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   
   // Get shop with plan info
   const { data: shop, error } = await supabase
@@ -148,7 +148,7 @@ export async function checkProductLimit(shopId: string) {
  * Get shop owner info
  */
 export async function getShopOwner(shopId: string) {
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   
   const { data: shop, error } = await supabase
     .from('shops')
@@ -178,7 +178,7 @@ export async function isShopOwner(shopId: string): Promise<boolean> {
   const user = await getCurrentUser()
   if (!user) return false
 
-  const supabase = createServerClient()
+  const supabase = await createServerClient()
   
   const { data: shop, error } = await supabase
     .from('shops')

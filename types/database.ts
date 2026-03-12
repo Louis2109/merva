@@ -38,6 +38,33 @@ export type Database = {
         }
         Relationships: []
       }
+      plans: {
+        Row: {
+          created_at: string | null
+          features: string[] | null
+          id: number
+          name: string
+          price: number
+          product_limit: number
+        }
+        Insert: {
+          created_at?: string | null
+          features?: string[] | null
+          id?: number
+          name: string
+          price: number
+          product_limit: number
+        }
+        Update: {
+          created_at?: string | null
+          features?: string[] | null
+          id?: number
+          name?: string
+          price?: number
+          product_limit?: number
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           category_id: number | null
@@ -99,6 +126,13 @@ export type Database = {
             referencedRelation: "shops"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "products_shop_id_fkey"
+            columns: ["shop_id"]
+            isOneToOne: false
+            referencedRelation: "shops_with_plans"
+            referencedColumns: ["id"]
+          },
         ]
       }
       profiles: {
@@ -107,6 +141,8 @@ export type Database = {
           created_at: string | null
           first_name: string | null
           id: string
+          is_admin: boolean | null
+          is_merchant: boolean | null
           last_name: string | null
           updated_at: string | null
         }
@@ -115,6 +151,8 @@ export type Database = {
           created_at?: string | null
           first_name?: string | null
           id: string
+          is_admin?: boolean | null
+          is_merchant?: boolean | null
           last_name?: string | null
           updated_at?: string | null
         }
@@ -123,6 +161,8 @@ export type Database = {
           created_at?: string | null
           first_name?: string | null
           id?: string
+          is_admin?: boolean | null
+          is_merchant?: boolean | null
           last_name?: string | null
           updated_at?: string | null
         }
@@ -131,44 +171,80 @@ export type Database = {
       shops: {
         Row: {
           created_at: string | null
+          deactivated_at: string | null
+          deactivated_by: string | null
+          deactivated_reason: string | null
           description: string | null
           id: string
           is_active: boolean | null
           logo_url: string | null
           name: string
           owner_id: string
+          plan_id: number | null
           slug: string
           updated_at: string | null
+          updated_by: string | null
           whatsapp_number: string
         }
         Insert: {
           created_at?: string | null
+          deactivated_at?: string | null
+          deactivated_by?: string | null
+          deactivated_reason?: string | null
           description?: string | null
           id?: string
           is_active?: boolean | null
           logo_url?: string | null
           name: string
           owner_id: string
+          plan_id?: number | null
           slug: string
           updated_at?: string | null
+          updated_by?: string | null
           whatsapp_number: string
         }
         Update: {
           created_at?: string | null
+          deactivated_at?: string | null
+          deactivated_by?: string | null
+          deactivated_reason?: string | null
           description?: string | null
           id?: string
           is_active?: boolean | null
           logo_url?: string | null
           name?: string
           owner_id?: string
+          plan_id?: number | null
           slug?: string
           updated_at?: string | null
+          updated_by?: string | null
           whatsapp_number?: string
         }
         Relationships: [
           {
+            foreignKeyName: "shops_deactivated_by_fkey"
+            columns: ["deactivated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "shops_owner_id_fkey"
             columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_updated_by_fkey"
+            columns: ["updated_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -192,10 +268,67 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      shops_with_plans: {
+        Row: {
+          created_at: string | null
+          deactivated_at: string | null
+          deactivated_by: string | null
+          deactivated_reason: string | null
+          description: string | null
+          id: string | null
+          is_active: boolean | null
+          logo_url: string | null
+          name: string | null
+          owner_avatar: string | null
+          owner_id: string | null
+          owner_name: string | null
+          plan_features: string[] | null
+          plan_id: number | null
+          plan_name: string | null
+          plan_price: number | null
+          product_limit: number | null
+          products_count: number | null
+          slug: string | null
+          updated_at: string | null
+          updated_by: string | null
+          whatsapp_number: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "shops_deactivated_by_fkey"
+            columns: ["deactivated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_plan_id_fkey"
+            columns: ["plan_id"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "shops_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      [_ in never]: never
+      can_add_product: { Args: { shop_uuid: string }; Returns: boolean }
+      get_product_limit_info: { Args: { shop_uuid: string }; Returns: Json }
+      is_admin: { Args: { user_id: string }; Returns: boolean }
     }
     Enums: {
       category_slug:

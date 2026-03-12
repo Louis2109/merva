@@ -224,17 +224,6 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                 whatsappNumber={product.shops.whatsapp_number}
               />
             )}
-            {/* WhatsApp CTA Button */}
-            {product.shops && product.shops.whatsapp_number && (
-              <div className="pt-4 hidden md:block">
-                <WhatsAppButton 
-                  whatsappNumber={product.shops.whatsapp_number}
-                  productTitle={product.title}
-                  productPrice={formatPrice(product.price)}
-                  fixed={false}
-                />
-              </div>
-            )}
           </div>
         </div>
 
