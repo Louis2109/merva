@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ProductCard } from '@/components/features/product-card'
 import { Badge } from '@/components/ui/badge'
-import { Store, MessageCircle, ShoppingBag, ArrowLeft, Package } from 'lucide-react'
+import { Store, MessageCircle, ShoppingBag, Package } from 'lucide-react'
 import type { Metadata } from 'next'
 
 /**
@@ -67,15 +67,6 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Back Button */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-emerald-600 mb-6 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Retour à l'accueil</span>
-        </Link>
-
         {/* Shop Header */}
         <div className="bg-white rounded-lg border border-gray-200 p-6 md:p-8 mb-8">
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">

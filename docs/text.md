@@ -21,8 +21,35 @@ Finir phase 1
 3. STEP 5 : Reset Password (30min)
 4. Tests complets + Deploy staging
 
+
 phase 2 (PWA) - App offline
 
 Phase 3 (i18n) - fr/en
 
 
+
+Question : C'est quoi le role d'un ingenieur ? Je me rends compte que beaucoup d'ingenieur apres l'ecole, quan d ils arrivent en entreprise, il n'arrive pas a transformer un pb en une solution concraite avec les realite du terrain. Pourquoi cela les arrivent-ils ? Qu'est-ce qui les manquent ? 
+
+
+
+Ce qui va te faire passer Senior :
+
+Pense toujours "edge cases" - Que se passe-t-il si...?
+Automatise les tests - Playwright > tests manuels
+Monitor en production - Logs, errors, performance
+Documente tes décisions - Pourquoi ce choix ? (ADR = Architecture Decision Records)
+Itère vite - MVP imparfait > Perfect vaporware
+
+
+Playwright permet de lancer les test et simuler le workflow d'un user sur navigateur
+# Lancer tous les tests
+npx playwright test
+
+# Lancer en mode visuel (voir le browser)
+npx playwright test --headed
+
+# Lancer un seul fichier
+npx playwright test tests/dashboard.spec.ts
+
+# Voir le rapport HTML
+npx playwright show-report

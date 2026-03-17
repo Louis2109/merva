@@ -4,7 +4,7 @@
 import { requireAdmin } from '@/lib/auth-helpers'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { LayoutDashboard, Store, Users, ArrowLeft } from 'lucide-react'
+import { LayoutDashboard, Store, Users } from 'lucide-react'
 
 /**
  * Admin Layout
@@ -35,21 +35,11 @@ export default async function AdminLayout({
       {/* Admin Header */}
       <header className="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold">🔧 Admin Panel</h1>
-              <span className="text-xs bg-blue-700 px-2 py-1 rounded">
-                Mervason v1.0
-              </span>
-            </div>
-            
-            <Link
-              href="/dashboard"
-              className="flex items-center gap-2 text-sm hover:text-blue-200 transition"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Retour Dashboard
-            </Link>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold">🔧 Admin Panel</h1>
+            <span className="text-xs bg-blue-700 px-2 py-1 rounded">
+              Mervason v1.0
+            </span>
           </div>
         </div>
       </header>
