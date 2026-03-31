@@ -3,8 +3,6 @@
 
 import { requireAdmin } from '@/lib/auth-helpers'
 import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import { LayoutDashboard, Store, Users } from 'lucide-react'
 
 /**
  * Admin Layout
@@ -44,22 +42,7 @@ export default async function AdminLayout({
         </div>
       </header>
 
-      {/* Admin Navigation */}
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex gap-6">
-            <NavLink href="/admin" icon={LayoutDashboard}>
-              Dashboard
-            </NavLink>
-            <NavLink href="/admin/shops" icon={Store}>
-              Boutiques
-            </NavLink>
-            <NavLink href="/admin/users" icon={Users}>
-              Utilisateurs
-            </NavLink>
-          </div>
-        </div>
-      </nav>
+      {/* Admin Navigation - REMOVED for clean UI */}
 
       {/* Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
@@ -69,25 +52,4 @@ export default async function AdminLayout({
   )
 }
 
-/**
- * Navigation Link Component
- */
-function NavLink({
-  href,
-  icon: Icon,
-  children,
-}: {
-  href: string
-  icon: React.ElementType
-  children: React.ReactNode
-}) {
-  return (
-    <Link
-      href={href}
-      className="flex items-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 transition"
-    >
-      <Icon className="w-4 h-4" />
-      {children}
-    </Link>
-  )
-}
+

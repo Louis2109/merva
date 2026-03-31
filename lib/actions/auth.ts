@@ -89,8 +89,21 @@ export async function login(formData: FormData) {
     redirect('/auth/login?error=invalid')
   }
 
+  // Check if user is admin
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('is_admin')
+    .eq('id', (await supabase.auth.getUser()).data.user?.id || '')
+    .single()
+
   revalidatePath('/', 'layout')
-  redirect('/dashboard')
+  
+  // Redirect to /admin if admin, /dashboard otherwise
+  if (profile?.is_admin) {
+    redirect('/admin')
+  } else {
+    redirect('/dashboard')
+  }
 }
 
 /**

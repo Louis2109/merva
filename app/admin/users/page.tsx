@@ -23,7 +23,7 @@ export default async function AdminUsersPage() {
   const supabase = await createServerClient()
 
   // Fetch all users with their profiles and shops
-  const { data: profiles } = await supabase
+  const { data: usersWithEmail } = await supabase
     .from('profiles')
     .select(`
       *,
@@ -34,18 +34,6 @@ export default async function AdminUsersPage() {
       )
     `)
     .order('created_at', { ascending: false })
-
-  // Get auth users (to get email)
-  const { data: { users: authUsers } } = await supabase.auth.admin.listUsers()
-
-  // Merge data (profile + email)
-  const usersWithEmail = profiles?.map((profile: any) => {
-    const authUser = authUsers?.find(u => u.id === profile.id)
-    return {
-      ...profile,
-      email: authUser?.email || 'N/A'
-    }
-  })
 
   return (
     <div className="space-y-6">
@@ -74,7 +62,7 @@ export default async function AdminUsersPage() {
                       Utilisateur
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                      Email
+                      ID Utilisateur
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Rôle
@@ -108,7 +96,7 @@ export default async function AdminUsersPage() {
                         </div>
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-600">
-                        {user.email}
+                        {user.id.slice(0, 12)}...
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex gap-2">
