@@ -143,8 +143,8 @@ export default async function AdminDashboardPage() {
         </Card>
       )}
 
-      {/* Main Sections - 2 columns */}
-      <div className="grid md:grid-cols-2 gap-6">
+      {/* Main Sections - 3 columns */}
+      <div className="grid md:grid-cols-3 gap-6">
         {/* Boutiques Management */}
         <Card>
           <CardHeader>
@@ -160,9 +160,9 @@ export default async function AdminDashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3 mb-4">
-              {recentShops?.slice(0, 3).map((shop: any) => (
+              {recentShops?.slice(0, 2).map((shop: any) => (
                 <div key={shop.id} className="flex items-center justify-between text-sm">
-                  <span className="font-medium">{shop.name}</span>
+                  <span className="font-medium truncate">{shop.name}</span>
                   <ShopStatusBadge isActive={shop.is_active} />
                 </div>
               ))}
@@ -175,7 +175,7 @@ export default async function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        {/* Users Management */}
+        {/* Commerçants Management */}
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
@@ -183,18 +183,43 @@ export default async function AdminDashboardPage() {
                 <Users className="w-5 h-5 text-blue-600" />
               </div>
               <div>
-                <CardTitle>Utilisateurs</CardTitle>
-                <CardDescription>Gérer les rôles</CardDescription>
+                <CardTitle>Commerçants</CardTitle>
+                <CardDescription>Gérer les vendeurs</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-gray-600 mb-4">
-              {totalUsers} utilisateurs enregistrés sur la plateforme
+              {totalUsers} vendeurs actifs
             </p>
             <Link href="/admin/users">
               <Button variant="secondary" className="w-full">
-                Voir {totalUsers} utilisateurs
+                Voir {totalUsers} commerçants
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        {/* Produits Management */}
+        <Card>
+          <CardHeader>
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Package className="w-5 h-5 text-green-600" />
+              </div>
+              <div>
+                <CardTitle>Produits</CardTitle>
+                <CardDescription>Modérer le catalogue</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-gray-600 mb-4">
+              {totalProducts} produits listés
+            </p>
+            <Link href="/admin/products">
+              <Button variant="secondary" className="w-full">
+                Voir {totalProducts} produits
               </Button>
             </Link>
           </CardContent>

@@ -204,11 +204,12 @@ export async function getShopsAdmin(filter: 'all' | 'active' | 'suspended' = 'al
         product_limit,
         price
       ),
-      profiles (
+      profiles!shops_owner_id_fkey (
         id,
         first_name,
         last_name,
-        avatar_url
+        avatar_url,
+        email
       )
     `)
     .order('created_at', { ascending: false })
