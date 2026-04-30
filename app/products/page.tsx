@@ -53,6 +53,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
     .gt('stock', 0)
     .order('created_at', { ascending: false })
 
+
   // Apply category filter if specified
   if (categoryId) {
     query = query.eq('category_id', categoryId)

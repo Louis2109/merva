@@ -16,11 +16,9 @@ AI role : Tu es un dev senior experimenter
 Context : Je suis un dev Junior, tu dois m'aider 
 
 Finir phase 1 
-1. STEP 3 : Merchant Settings + Pricing (1h30)
-2. STEP 4 : Notifications Email (1h)
-3. STEP 5 : Reset Password (30min)
+1. STEP 4 : Merchant Settings + dashbord admin 
+3. STEP 5 : Reset Password (30min) - update auth system
 4. Tests complets + Deploy staging
-
 
 phase 2 (PWA) - App offline
 

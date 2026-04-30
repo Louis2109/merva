@@ -202,7 +202,7 @@ export function ShopSettingsForm({ shop }: ShopSettingsFormProps) {
               rows={4}
               defaultValue={shop.description || ''}
               placeholder="Décrivez votre boutique, vos produits, votre spécialité..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
               maxLength={500}
             />
             <p className="text-xs text-gray-500">Optionnel - Maximum 500 caractères</p>

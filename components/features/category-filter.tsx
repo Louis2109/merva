@@ -50,11 +50,11 @@ export function CategoryFilter({ categories }: CategoryFilterProps) {
       <select
         value={currentCategory || 'all'}
         onChange={(e) => handleCategoryChange(e.target.value)}
-        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white"
+        className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-gray-900 font-medium"
       >
-        <option value="all">Toutes les catégories</option>
+        <option value="all" className="text-gray-900">Toutes les catégories</option>
         {categories.map((category) => (
-          <option key={category.id} value={category.id}>
+          <option key={category.id} value={category.id} className="text-gray-900">
             {category.name}
           </option>
         ))}

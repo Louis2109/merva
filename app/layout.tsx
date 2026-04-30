@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layouts/navbar";
+import { Footer } from "@/components/layouts/footer";
 import { createServerClient } from "@/utils/supabase/server";
 import { Toaster } from "sonner";
 
@@ -78,12 +79,13 @@ export default async function RootLayout({
         <meta name="theme-color" content="#F97316" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50 flex flex-col min-h-screen`}
       >
         <Navbar user={user} />
-        <main className="min-h-screen">
+        <main className="flex-1">
           {children}
         </main>
+        <Footer />
         <Toaster position="top-right" richColors />
       </body>
     </html>

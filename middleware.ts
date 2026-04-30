@@ -18,6 +18,14 @@ import { NextResponse, type NextRequest } from 'next/server'
  * Time to complete: 2min
  */
 export async function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  const isProtectedRoute = pathname.startsWith('/dashboard') || pathname.startsWith('/admin')
+
+  // Public routes: skip Supabase auth checks to avoid slowdowns/timeouts
+  if (!isProtectedRoute) {
+    return NextResponse.next()
+  }
+
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -53,9 +61,6 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // Check if accessing protected route
-  const isProtectedRoute = request.nextUrl.pathname.startsWith('/dashboard')
-
   // Redirect if not authenticated and trying to access protected route
   if (isProtectedRoute && !user) {
     const redirectUrl = request.nextUrl.clone()
@@ -69,14 +74,5 @@ export async function middleware(request: NextRequest) {
 
 // Configure which routes to run middleware on
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except:
-     * - _next/static (static files)
-     * - _next/image (image optimization)
-     * - favicon.ico (favicon)
-     * - public folder
-     */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
-  ],
+  matcher: ['/dashboard/:path*', '/admin/:path*'],
 }
