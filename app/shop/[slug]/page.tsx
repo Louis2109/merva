@@ -59,10 +59,14 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
     .gt('stock', 0)
     .order('created_at', { ascending: false })
 
-  // Format WhatsApp URL for contact
-  const whatsappUrl = `https://wa.me/${shop.whatsapp_number}?text=${encodeURIComponent(
-    `Bonjour, j'aimerais en savoir plus sur votre boutique ${shop.name}`
-  )}`
+  // Format WhatsApp URL for contact (admin number)
+  const adminNumberRaw = process.env.PHONE_ADMIN_NUMBER || ''
+  const adminWhatsappNumber = adminNumberRaw.replace(/\D/g, '')
+  const whatsappUrl = adminWhatsappNumber
+    ? `https://wa.me/${adminWhatsappNumber}?text=${encodeURIComponent(
+        `Bonjour, j'aimerais en savoir plus sur la boutique ${shop.name}`
+      )}`
+    : ''
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -104,7 +108,7 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
             </div>
 
             {/* WhatsApp Contact Button */}
-            {shop.whatsapp_number && (
+            {adminWhatsappNumber && (
               <a
                 href={whatsappUrl}
                 target="_blank"

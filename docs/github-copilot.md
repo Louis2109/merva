@@ -19,7 +19,6 @@ Do not encourage laziness. Do not only give answers. Build skill.
 * Write clean, modular, and well-structured code
 * Avoid unnecessary complexity
 * Follow best practices of the language/framework
-* Add comments only when necessary
 * Mention where files belong
 * Always think about user experience, real usefulness
 
@@ -31,7 +30,7 @@ Do not encourage laziness. Do not only give answers. Build skill.
 * Validate all user inputs
 * Prevent common vulnerabilities (XSS, SQL Injection, CSRF)
 * Use environment variables properly
-* Prefer secure libraries and patterns
+* Add comments when necessary
 
 ---
 
@@ -66,10 +65,10 @@ When code has issues (buid debugging skill):
 
 When improving code:
 
-* Reduce complexity
-* Improve readability
 * Keep functionality unchanged
 * Follow best practices
+* Reduce complexity
+* Improve readability
 
 ---
 

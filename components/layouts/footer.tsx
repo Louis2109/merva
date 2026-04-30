@@ -94,10 +94,10 @@ export function Footer() {
               </li>
               <li>
                 <Link 
-                  href="/pricing" 
+                  href="/dashboard/shop/create" 
                   className="text-sm text-gray-400 hover:text-orange-400 transition-colors"
                 >
-                  Voir les plans
+                  Creer boutique
                 </Link>
               </li>
             </ul>
