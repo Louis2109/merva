@@ -79,6 +79,9 @@ const PLANS = [
 export default async function PricingPage() {
   const supabase = await createServerClient()
 
+  const adminNumberRaw = process.env.PHONE_ADMIN_NUMBER || ''
+  const adminWhatsappNumber = adminNumberRaw.replace(/\D/g, '')
+
   // Get current user and their shop/plan
   const { data: { user } } = await supabase.auth.getUser()
   
@@ -141,6 +144,7 @@ export default async function PricingPage() {
               shopId={shopId}
               isLoggedIn={isLoggedIn}
               hasShop={hasShop}
+              adminWhatsappNumber={adminWhatsappNumber}
             />
           ))}
         </div>
@@ -198,15 +202,19 @@ export default async function PricingPage() {
         <p className="text-gray-600 mb-4">
           Une question ? Contactez notre équipe
         </p>
-        <a
-          href={`https://wa.me/${process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || '237000000000'}?text=${encodeURIComponent('Bonjour, j\'ai une question sur les tarifs Mervason.')}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold"
-        >
-          <MessageCircle className="w-5 h-5" />
-          Discuter sur WhatsApp
-        </a>
+        {adminWhatsappNumber ? (
+          <a
+            href={`https://wa.me/${adminWhatsappNumber}?text=${encodeURIComponent('Bonjour, j\'ai une question sur les tarifs Mervason.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-green-600 hover:text-green-700 font-semibold"
+          >
+            <MessageCircle className="w-5 h-5" />
+            Discuter sur WhatsApp
+          </a>
+        ) : (
+          <span className="text-sm text-gray-500">Contact WhatsApp indisponible</span>
+        )}
       </div>
     </div>
   )

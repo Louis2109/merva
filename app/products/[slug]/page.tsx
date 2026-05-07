@@ -25,6 +25,7 @@ import type { Metadata } from 'next'
  * - WhatsApp contact button
  * - Breadcrumb navigation
  * - Server Component (SEO-friendly)
+ * - ISR: Cached for 1 hour (3600s)
  * 
  * Data:
  * - Fetch product by slug
@@ -33,6 +34,10 @@ import type { Metadata } from 'next'
  * 
  * Time to complete: 12min
  */
+
+// Cache product detail pages for 1 hour (ISR)
+export const revalidate = 3600
+
 interface ProductDetailPageProps {
   params: Promise<{ slug: string }>
 }
@@ -83,6 +88,10 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
   // Build WhatsApp pre-filled message
   const whatsappMessage = `Bonjour, je suis intéressé par ${product.title} à ${formatPrice(product.price)} XAF`
+
+  // Admin WhatsApp number (from env)
+  const adminNumberRaw = process.env.PHONE_ADMIN_NUMBER || ''
+  const adminWhatsappNumber = adminNumberRaw.replace(/\D/g, '')
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -217,11 +226,11 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
               </p>
             </div>
             {/* Order Form - Customer Delivery Information */}
-            {product.shops && product.shops.whatsapp_number && (
+            {adminWhatsappNumber && (
               <OrderForm
                 productTitle={product.title}
                 productPrice={formatPrice(product.price)}
-                whatsappNumber={product.shops.whatsapp_number}
+                whatsappNumber={adminWhatsappNumber}
               />
             )}
           </div>
@@ -262,10 +271,10 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       </div>
 
       {/* WhatsApp Fixed Button - Mobile only */}
-      {product.shops && product.shops.whatsapp_number && (
+      {adminWhatsappNumber && (
         <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-50 animate-slide-up">
           <WhatsAppButton 
-            whatsappNumber={product.shops.whatsapp_number}
+            whatsappNumber={adminWhatsappNumber}
             productTitle={product.title}
             productPrice={formatPrice(product.price)}
             fixed={true}

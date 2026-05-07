@@ -7,6 +7,8 @@ import { createServerClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
+const MIN_PASSWORD_LENGTH = 8
+
 /**
  * Register new user with email/password
  * 
@@ -27,8 +29,8 @@ export async function register(formData: FormData) {
   const lastName = formData.get('last_name') as string
 
   // Validation (basic)
-  if (!email || !password || password.length < 6) {
-    console.error('Invalid email or password (min 6 characters)')
+  if (!email || !password || password.length < MIN_PASSWORD_LENGTH) {
+    console.error('Invalid email or password (min length)')
     redirect('/auth/register?error=invalid')
   }
 
@@ -104,6 +106,33 @@ export async function login(formData: FormData) {
   } else {
     redirect('/dashboard')
   }
+}
+
+/**
+ * Send password reset email
+ * 
+ * @param formData - Contains email
+ */
+export async function forgotPassword(formData: FormData) {
+  const supabase = await createServerClient()
+
+  const email = formData.get('email') as string
+  if (!email) {
+    redirect('/auth/forgot-password?error=required')
+  }
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/auth/reset-password`,
+  })
+
+  if (error) {
+    console.error('Reset password error:', error.message)
+    redirect('/auth/forgot-password?error=send_failed')
+  }
+
+  redirect('/auth/forgot-password?success=1')
 }
 
 /**

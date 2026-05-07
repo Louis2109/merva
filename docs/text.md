@@ -25,7 +25,13 @@ Phase 3 (i18n) - fr/en
 
 
 
+git status    # 1. Voir les fichiers modifiés
 
+git add -A    # 2. Ajouter tous les changements
+
+git commit -m "Phase 1 Auth: Fix"   # 3. Commit avec message descriptif
+
+git log --oneline -1    # 4. Vérifier le commit
 
 
 

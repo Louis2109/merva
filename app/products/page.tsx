@@ -25,9 +25,14 @@ import { ShoppingBag } from 'lucide-react'
  * - Fetch products with optional category filter
  * - Order by newest first
  * - Fetch all categories for filter dropdown
+ * - ISR: Cached for 60 seconds
  * 
  * Time to complete: 10min
  */
+
+// Cache products page for 60 seconds (ISR)
+export const revalidate = 60
+
 interface ProductsPageProps {
   searchParams?: Promise<{ category?: string }>
 }

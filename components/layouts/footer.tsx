@@ -24,6 +24,11 @@ import { Mail, Phone, MapPin } from 'lucide-react'
  */
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const adminNumberRaw = process.env.PHONE_ADMIN_NUMBER || ''
+  const adminWhatsappNumber = adminNumberRaw.replace(/\D/g, '')
+  const adminWhatsappUrl = adminWhatsappNumber
+    ? `https://wa.me/${adminWhatsappNumber}?text=${encodeURIComponent('Bonjour, j\'ai une question sur Mervason.')}`
+    : '#'
 
   return (
     <footer className="bg-gray-900 text-gray-100 border-t border-gray-800">
@@ -149,7 +154,12 @@ export function Footer() {
               <a href="#" className="hover:text-orange-400 transition-colors">
                 Facebook
               </a>
-              <a href="#" className="hover:text-orange-400 transition-colors">
+              <a
+                href={adminWhatsappUrl}
+                target={adminWhatsappNumber ? '_blank' : undefined}
+                rel={adminWhatsappNumber ? 'noopener noreferrer' : undefined}
+                className="hover:text-orange-400 transition-colors"
+              >
                 WhatsApp
               </a>
             </div>

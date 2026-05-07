@@ -35,6 +35,7 @@ interface ContactAdminButtonProps {
   shopId: string | null
   isLoggedIn: boolean
   hasShop: boolean
+  adminWhatsappNumber: string
 }
 
 export function ContactAdminButton({
@@ -44,6 +45,7 @@ export function ContactAdminButton({
   shopId,
   isLoggedIn,
   hasShop,
+  adminWhatsappNumber,
 }: ContactAdminButtonProps) {
   const router = useRouter()
 
@@ -69,6 +71,11 @@ export function ContactAdminButton({
       return
     }
 
+    if (!adminWhatsappNumber) {
+      alert('Numéro WhatsApp admin non configuré')
+      return
+    }
+
     // Contact admin for upgrade/downgrade
     const currentPlanName = getPlanName(currentPlanId || 1)
     const action = canDowngrade ? 'rétrograder vers' : 'passer au'
@@ -86,7 +93,7 @@ ${plan.price > 0 ? `- Prix: ${plan.price.toLocaleString('fr-FR')} XAF/mois` : ''
 
 Merci de m'indiquer la marche à suivre.`
 
-    const whatsappUrl = `https://wa.me/${process.env.NEXT_PUBLIC_ADMIN_WHATSAPP || '237000000000'}?text=${encodeURIComponent(message)}`
+    const whatsappUrl = `https://wa.me/${adminWhatsappNumber}?text=${encodeURIComponent(message)}`
     
     window.open(whatsappUrl, '_blank')
   }

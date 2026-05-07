@@ -26,6 +26,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // Fast check: Look for session cookie first
+  const hasSessionCookie = request.cookies.has('sb-fuimqugdecmjgttseevk-auth-token')
+  
+  // If no session cookie, redirect immediately without Supabase call
+  if (!hasSessionCookie) {
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.pathname = '/auth/login'
+    redirectUrl.searchParams.set('redirectTo', request.nextUrl.pathname)
+    return NextResponse.redirect(redirectUrl)
+  }
+
   let response = NextResponse.next({
     request: {
       headers: request.headers,
@@ -56,7 +67,7 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Get user session
+  // Get user session (with fast-fail if cookie exists)
   const {
     data: { user },
   } = await supabase.auth.getUser()

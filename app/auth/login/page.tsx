@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { login } from '@/lib/actions/auth'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -19,7 +20,28 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
  * 
  * Time to complete: 2min
  */
-export default function LoginPage() {
+interface LoginPageProps {
+  searchParams?: Promise<{ error?: string; reset?: string }>
+}
+
+function getMessage(error?: string, reset?: string) {
+  if (reset === 'success') {
+    return { type: 'success', text: 'Mot de passe mis à jour. Vous pouvez vous connecter.' }
+  }
+
+  switch (error) {
+    case 'required':
+      return { type: 'error', text: 'Email et mot de passe requis.' }
+    case 'invalid':
+      return { type: 'error', text: 'Email ou mot de passe incorrect.' }
+    default:
+      return null
+  }
+}
+
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const params = await searchParams
+  const message = getMessage(params?.error, params?.reset)
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card variant="glass" className="w-full max-w-md">
@@ -48,16 +70,33 @@ export default function LoginPage() {
             {/* Password Field */}
             <div className="space-y-2">
               <Label htmlFor="password">Mot de passe</Label>
-              <Input
+              <PasswordInput
                 id="password"
                 name="password"
-                type="password"
                 placeholder="••••••••"
                 required
                 autoComplete="current-password"
-                minLength={6}
+                minLength={8}
               />
             </div>
+
+            <div className="text-right">
+              <Link href="/auth/forgot-password" className="text-sm text-orange-500 hover:underline font-medium">
+                Mot de passe oublié ?
+              </Link>
+            </div>
+
+            {message && (
+              <div
+                className={`rounded-lg border px-3 py-2 text-sm ${
+                  message.type === 'success'
+                    ? 'border-green-200 bg-green-50 text-green-700'
+                    : 'border-red-200 bg-red-50 text-red-700'
+                }`}
+              >
+                {message.text}
+              </div>
+            )}
           </CardContent>
 
           <CardFooter className="flex flex-col gap-4">
