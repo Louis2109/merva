@@ -6,6 +6,8 @@ import { Footer } from "@/components/layouts/footer";
 import { createServerClient } from "@/utils/supabase/server";
 import { Toaster } from "sonner";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://mervason.vercel.app';
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://mervason.com'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Mervason - Marketplace Multi-Vendeurs au Cameroun",
     template: "%s | Mervason"
@@ -30,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://mervason.com",
+    url: siteUrl,
     siteName: "Mervason",
     title: "Mervason - Marketplace Multi-Vendeurs",
     description: "Achetez et vendez facilement via WhatsApp au Cameroun",
